@@ -26,10 +26,16 @@ public class Indexer {
             // load conf properties
             PropertyService propertyService = new PropertyService(args[0]);
 
+            logger.info("initializing es transportclient...");
+            logger.info(propertyService.getEsHostname());
+            logger.info(propertyService.getEsPort());
+
             // on startup
             TransportClient client = new PreBuiltTransportClient(Settings.EMPTY)
                     .addTransportAddress(new TransportAddress(InetAddress.getByName(
                             propertyService.getEsHostname()), propertyService.getEsPort()));
+
+            logger.info("client is initialized");
 
             // initialize indexerService and index photos
             IndexerService indexerService = new IndexerService(propertyService);
