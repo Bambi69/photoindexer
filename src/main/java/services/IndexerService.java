@@ -109,7 +109,9 @@ public class IndexerService {
                 "    }\n" +
                 "  }";
 
-        logger.info(locationType);
+        logger.info("trying to create index...");
+        logger.info(propertyService.getEsPhotoIndex());
+        logger.info(propertyService.getEsPhotoIndexType());
 
         client.admin().indices().prepareCreate(propertyService.getEsPhotoIndex())
                 .addMapping(propertyService.getEsPhotoIndexType(),locationType,XContentType.JSON)
